@@ -1,9 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const user = require('../models/users');
-const { BadAuthenticationError } = require('../constructorError/error');
-const { BadRequestError } = require('../constructorError/error');
-// const { IdNotFoundError } = require('../constructorError/error');
+const { BadAuthenticationError, AccessDenied, BadRequestError } = require('../constructorError/error');
 const { JWT_SECRET } = require('../config');
 
 const { NODE_ENV } = process.env;
@@ -55,7 +53,7 @@ module.exports.login = (req, res, next) => {
       return bcrypt.compare(password, newUser.password)
         .then((matched) => {
           if (!matched) {
-            throw new BadAuthenticationError('Неправильные почта или пароль');
+            throw new AccessDenied('Неправильные почта или пароль');
           }
           const token = jwt.sign(
             { _id: newUser._id },

@@ -52,22 +52,6 @@ app.use((req, res) => {
   res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
-
-
-// app.use((err, req, res, next) => {
-//   const status = err.status || 500;
-//   let { message } = err;
-//   if (err.name === 'ValidationError') {
-//     return res.status(400).send('ValidationError');
-//   }
-//   if (status === 500) {
-//     console.error(err.stack || err);
-//     message = 'unexpected error';
-//   }
-//   return res.status(status).send(message);
-// });
-
-
 app.use(errorLogger);
 app.use(errors()); // обработчик ошибок celebrate
 
@@ -82,6 +66,5 @@ app.use((err, req, res, next) => {
 
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Server started in ${PORT}`);
 });

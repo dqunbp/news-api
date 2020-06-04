@@ -1,7 +1,7 @@
 // const validator = require('validator');
 const article = require('../models/article');
 const { BadRequestError } = require('../constructorError/error');
-const { IdNotFoundError, AccessDenied } = require('../constructorError/error');
+const { IdNotFoundError } = require('../constructorError/error');
 
 
 module.exports.getArticles = (req, res, next) => {
@@ -10,7 +10,7 @@ module.exports.getArticles = (req, res, next) => {
     .then((articles) => res.send({ data: articles }))
     // .catch(next);
     .catch(() => {
-      const err = new BadRequestError(`Карточки с id: ${req.params.cardId} не существуют`);
+      const err = new BadRequestError('Статьи не существуют');
       return next(err);
     });
 };
@@ -41,5 +41,9 @@ module.exports.deleteArticle = (req, res, next) => {
         res.send({ data: user });
       }
     })
-    .catch(next);
+    .catch(() => {
+      const err = new IdNotFoundError('Не возможно удалить статью');
+      return next(err);
+    });
+  // .catch(next);
 };
