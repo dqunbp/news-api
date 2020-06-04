@@ -13,7 +13,6 @@ const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 
-
 const { PORT = 3000 } = process.env;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,18 +21,12 @@ app.use(cookieParser());
 app.use(helmet());
 
 
-mongoose.connect('mongodb://localhost:27017/newsdb', {
+mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
   autoIndex: true, // создаём уникальный индекс в монго
-});
-
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
 });
 
 app.use(requestLogger);
@@ -58,6 +51,8 @@ app.use(routerUsers);
 app.use((req, res) => {
   res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
 });
+
+
 
 // app.use((err, req, res, next) => {
 //   const status = err.status || 500;
@@ -84,6 +79,8 @@ app.use((err, req, res, next) => {
     message: statusCode === 500 ? 'Произошла ошибка на сервере' : message,
   });
 });
+
+
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Server started in ${PORT}`);
