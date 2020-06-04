@@ -71,6 +71,8 @@ app.use((req, res) => {
 //   }
 //   return res.status(status).send(message);
 // });
+
+
 app.use(errorLogger);
 app.use(errors()); // обработчик ошибок celebrate
 
@@ -82,6 +84,7 @@ app.use((err, req, res, next) => {
     message: statusCode === 500 ? 'Произошла ошибка на сервере' : message,
   });
 });
+
 
 
 app.listen(PORT, () => {
