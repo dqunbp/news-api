@@ -19,3 +19,6 @@ node_modules
 jwt_secret.env
 .jwt_secret.env
 *jwt_secret.env
+.centralError.js
+*centralError.js
+centralError.js
