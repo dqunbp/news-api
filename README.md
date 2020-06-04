@@ -1,2 +1,2 @@
-# news-service-api
-news-service-api
+# https://news-today.site/
+
