@@ -84,9 +84,6 @@ app.use((err, req, res, next) => {
     message: statusCode === 500 ? 'Произошла ошибка на сервере' : message,
   });
 });
-
-
-
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Server started in ${PORT}`);
