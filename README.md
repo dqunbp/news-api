@@ -1,9 +1,9 @@
 # news-service-api
 
 ## Service for search news with authentication
-Версия 1.0.0 https://github.com/AleksandrHexlet/news-service-api
+Версия 1.0.0 https://github.com/AleksandrHexlet/news-api
 IP 84.201.133.223
-Domain 
+Domain https://news-today.site/
 RUS
 
 Для развертывания проекта локально необходимо:
