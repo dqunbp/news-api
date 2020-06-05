@@ -8,7 +8,7 @@ const { NODE_ENV } = process.env;
 
 module.exports.getUser = (req, res, next) => {
   user
-    .findById(req.user._id)
+    .findById(req.user.id)
     .then((users) => res.send({ data: users }))
     .catch(next);
 };
