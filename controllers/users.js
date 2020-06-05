@@ -6,17 +6,11 @@ const { JWT_SECRET } = require('../config');
 
 const { NODE_ENV } = process.env;
 
-module.exports.getUsers = (req, res, next) => {
+module.exports.getUser = (req, res, next) => {
   user
-    .find({})
+    .findById(req.user._id)
     .then((users) => res.send({ data: users }))
     .catch(next);
-  // .catch(() => {
-  //   const err = new BadRequestError(
-  //     `Пользователя с id: ${req.params.id} не существует`,
-  //   );
-  //   return next(err);
-  // });
 };
 
 module.exports.createUser = (req, res, next) => {

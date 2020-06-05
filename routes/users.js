@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
-const { getUsers } = require('../controllers/users');
+const { getUser } = require('../controllers/users');
 
 router.get(
   '/users/me',
@@ -19,7 +19,7 @@ router.get(
           }),
       }),
   }),
-  getUsers,
+  getUser,
 );
 
 
