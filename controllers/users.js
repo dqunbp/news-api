@@ -8,10 +8,13 @@ const { NODE_ENV } = process.env;
 
 module.exports.getUser = (req, res, next) => {
   user
-    .findById(req.user.id)
+    .findById(req.user._id)
     .then((users) => res.send({ data: users }))
+    .then((users) => console.log(users))
+
     .catch(next);
 };
+
 
 module.exports.createUser = (req, res, next) => {
   const {
