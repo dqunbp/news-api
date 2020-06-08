@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema({
     // в строке поиска email ===> user.findOne ({email}).select('+password') надо к findOne добавить .select ('+password')
   },
 });
+
 userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('user', userSchema);

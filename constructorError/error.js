@@ -13,6 +13,7 @@ class BadAuthenticationError extends Error {
   }
 }
 
+
 class AccessDenied extends Error {
   constructor(message) {
     super(message);
@@ -26,10 +27,17 @@ class IdNotFoundError extends Error {
     this.statusCode = 404;
   }
 }
+class BadEmail extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = 409;
+  }
+}
 
 module.exports = {
   BadRequestError,
   BadAuthenticationError,
   IdNotFoundError,
   AccessDenied,
+  BadEmail,
 };

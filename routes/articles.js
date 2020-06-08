@@ -7,6 +7,8 @@ const {
   getArticles,
   createArticles,
   deleteArticle,
+  checkArticleBelongUser,
+  doesArticleExist,
 } = require('../controllers/articles');
 
 router.get('/articles', getArticles);
@@ -44,10 +46,16 @@ router.delete(
   '/articles/:articleId',
   celebrate({
     params: Joi.object().keys({
-      articleId: Joi.string().alphanum().length(24),
+      articleId: Joi.string()
+        .alphanum()
+        .length(24)
+        .regex(/^[0-9a-fA-F]{24}$/),
     }),
   }),
+  doesArticleExist,
+  checkArticleBelongUser,
   deleteArticle,
 );
+
 
 module.exports = router;

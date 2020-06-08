@@ -1,7 +1,11 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const user = require('../models/users');
-const { BadAuthenticationError, AccessDenied, BadRequestError } = require('../constructorError/error');
+const {
+  BadAuthenticationError,
+  AccessDenied,
+  BadEmail,
+} = require('../constructorError/error');
 const { JWT_SECRET } = require('../config');
 
 const { NODE_ENV } = process.env;
@@ -10,7 +14,7 @@ module.exports.getUser = (req, res, next) => {
   user
     .findById(req.user._id)
     .then((users) => res.send({ data: users }))
-    .then((users) => console.log(users))
+    // .then((users) => console.log(users))
 
     .catch(next);
 };
@@ -31,9 +35,7 @@ module.exports.createUser = (req, res, next) => {
       .then((newUser) => res.status(200).send(newUser))
       // .catch(next);
       .catch(() => {
-        const err = new BadRequestError(
-          'Не удалось создать пользователя.',
-        );
+        const err = new BadEmail('Не удалось создать пользователя.');
         return next(err);
       });
   });

@@ -33,6 +33,38 @@ module.exports.createArticles = (req, res, next) => {
     });
 };
 
+module.exports.doesArticleExist = (req, res, next) => {
+  article
+    .findById(req.params.articleId)
+    .then((checkArticle) => {
+      if (!checkArticle) {
+        throw new IdNotFoundError('Не возможно удалить статью.Cтатьи не существует');
+      }
+      next();
+    })
+    .catch(next);
+};
+
+
+module.exports.checkArticleBelongUser = (req, res, next) => {
+  article
+    .findById(req.params.articleId)
+    .select('+owner')
+    .then((checkArticle) => {
+      const { owner } = checkArticle;
+      const superOwner = String(owner);
+      if (req.user._id !== superOwner) {
+        throw new BadRequestError(
+          'Чтобы удалить статью, вам необходимо быть её владельцем',
+        );
+      }
+      next();
+    })
+
+    .catch(next);
+};
+
+
 module.exports.deleteArticle = (req, res, next) => {
   article
     .findByIdAndRemove(req.params.articleId)
@@ -41,9 +73,9 @@ module.exports.deleteArticle = (req, res, next) => {
         res.send({ data: user });
       }
     })
-    .catch(() => {
-      const err = new IdNotFoundError('Не возможно удалить статью');
-      return next(err);
-    });
-  // .catch(next);
+    // .catch(() => {
+    //   const err = new IdNotFoundError('Не возможно удалить статью');
+    //   return next(err);
+    // });
+    .catch(next);
 };
