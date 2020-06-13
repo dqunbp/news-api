@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const router = require('./routes');
-const centralError = require('./constructorError/centralError');
+// const centralError = require('./constructorError/centralError');
 
 const { DATABASE_URL } = require('./configMongo');
 const { limiter } = require('./reateLimiterConfig');
@@ -35,7 +35,10 @@ app.use(requestLogger);
 app.use(limiter);
 app.use('/', router);
 
-app.use(centralError);
+// app.use(centralError);
+router.use((req, res) => {
+  res.status(400).send({ message: 'Запрашиваемый ресурс не найден' });
+});
 
 
 app.use(errorLogger);
