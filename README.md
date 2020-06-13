@@ -4,7 +4,8 @@
 Версия 1.0.0 https://github.com/AleksandrHexlet/news-api
 IP 84.201.143.93
 
-Domain https://news-today.site/
+Domain https://api.news-today.site/
+       https://news-today.site/
 RUS
 
 Для развертывания проекта локально необходимо:
