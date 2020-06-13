@@ -45,7 +45,6 @@ module.exports.doesArticleExist = (req, res, next) => {
     .catch(next);
 };
 
-
 module.exports.checkArticleBelongUser = (req, res, next) => {
   article
     .findById(req.params.articleId)
