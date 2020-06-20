@@ -27,9 +27,9 @@ module.exports.createUser = (req, res, next) => {
   bcrypt.hash(password, 10).then((hash) => {
     user
       .create({
-        name,
         email,
         password: hash,
+        name,
       })
       .then((newUser) => user.findOne({ _id: newUser._id }))
       .then((newUser) => res.status(200).send(newUser))
