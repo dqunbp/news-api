@@ -2,12 +2,12 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const cors = require('cors');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const router = require('./routes');
 // const centralError = require('./constructorError/centralError');
@@ -46,6 +46,7 @@ app.use((req, res, next) => {
   if (allowedCors.includes(origin)) {
     // Проверяем, что значение origin есть среди разрешённых доменов
     res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
   }
 
   next();
