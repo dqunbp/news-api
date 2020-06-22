@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const { errorLogger, requestLogger } = require('./middlewares/logger');
 const router = require('./routes');
 // const centralError = require('./constructorError/centralError');
@@ -17,6 +18,19 @@ const { limiter } = require('./reateLimiterConfig');
 const { PORT } = require('./config');
 
 const app = express();
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      'http://news-today.site/',
+      'https://news-today.site/',
+      'https://www.news-today.site/',
+      'http://www.news-today.site/',
+      'https://github.com/AleksandrHexlet',
+    ],
+  }),
+);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
