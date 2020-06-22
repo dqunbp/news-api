@@ -31,6 +31,26 @@ app.use(
   }),
 );
 
+const allowedCors = [
+  'http://news-today.site/',
+  'https://news-today.site/',
+  'https://www.news-today.site/',
+  'http://www.news-today.site/',
+  'https://github.com/AleksandrHexlet',
+  'localhost:3000',
+];
+
+app.use((req, res, next) => {
+  const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
+
+  if (allowedCors.includes(origin)) {
+    // Проверяем, что значение origin есть среди разрешённых доменов
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  next();
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
