@@ -32,7 +32,8 @@ module.exports.createUser = (req, res, next) => {
         name,
       })
       .then((newUser) => user.findOne({ _id: newUser._id }))
-      .then((newUser) => res.status(200).send(newUser))
+      .then((newUser) => res.status(200).send({ data: newUser }))
+      // .then((newUser) => res.status(200).send(newUser))
       // .catch(next);
       .catch(() => {
         const err = new BadEmail('Не удалось создать пользователя.');
