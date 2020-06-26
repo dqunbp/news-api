@@ -27,6 +27,7 @@ app.use(
       'https://www.news-today.site/',
       'http://www.news-today.site/',
       'https://github.com/AleksandrHexlet',
+      'localhost:3000',
     ],
   }),
 );
