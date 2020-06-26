@@ -26,6 +26,10 @@ app.use(
       'https://news-today.site/',
       'https://www.news-today.site/',
       'http://www.news-today.site/',
+      'http://www.fotoshare.tk/',
+      'https://www.fotoshare.tk/',
+      'http://fotoshare.tk/',
+      'https://fotoshare.tk/',
       'https://github.com/AleksandrHexlet',
       'localhost:3000',
     ],
@@ -38,7 +42,11 @@ const allowedCors = [
   'https://www.news-today.site/',
   'http://www.news-today.site/',
   'https://github.com/AleksandrHexlet',
-  'localhost:3000',
+  'http://www.fotoshare.tk/',
+  'https://www.fotoshare.tk/',
+  'http://fotoshare.tk/',
+  'https://fotoshare.tk/',
+  'http://localhost:8080',
 ];
 
 app.use((req, res, next) => {
@@ -52,6 +60,12 @@ app.use((req, res, next) => {
 
   next();
 });
+
+const corsOptions = {
+  origin: 'http://localhost:8080',
+  credentials: true, // для передачи заголовка Access-Control-Allow-credentials
+};
+app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
