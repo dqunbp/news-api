@@ -31,7 +31,8 @@ app.use(
       'http://fotoshare.tk/',
       'https://fotoshare.tk/',
       'https://github.com/AleksandrHexlet',
-      'localhost:3000',
+      'http://localhost:8080',
+      // 'localhost:3000',
     ],
   }),
 );
