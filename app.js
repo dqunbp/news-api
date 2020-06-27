@@ -2,7 +2,6 @@
 require('dotenv').config();
 
 const express = require('express');
-const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -18,24 +17,6 @@ const { limiter } = require('./reateLimiterConfig');
 const { PORT } = require('./config');
 
 const app = express();
-app.use(
-  cors({
-    credentials: true,
-    origin: [
-      'http://news-today.site/',
-      'https://news-today.site/',
-      'https://www.news-today.site/',
-      'http://www.news-today.site/',
-      'http://www.fotoshare.tk/',
-      'https://www.fotoshare.tk/',
-      'http://fotoshare.tk/',
-      'https://fotoshare.tk/',
-      'https://github.com/AleksandrHexlet',
-      'http://localhost:8080',
-      // 'localhost:3000',
-    ],
-  }),
-);
 
 const allowedCors = [
   'http://news-today.site/',
@@ -61,12 +42,6 @@ app.use((req, res, next) => {
 
   next();
 });
-
-const corsOptions = {
-  origin: 'http://localhost:8080',
-  credentials: true, // для передачи заголовка Access-Control-Allow-credentials
-};
-app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
