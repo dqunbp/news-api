@@ -41,18 +41,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// app.use((req, res, next) => {
-//   const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
-
-//   if (allowedCors.includes(origin)) {
-//     // Проверяем, что значение origin есть среди разрешённых доменов
-//     res.header('Access-Control-Allow-Origin', origin);
-//     res.header('Access-Control-Allow-Credentials', 'true');
-//   }
-
-//   next();
-// });
-
 app.use((req, res, next) => {
   if (req.headers.origin && allowedCors.includes(req.headers.origin)) {
     res.header('Access-Control-Allow-Origin', req.headers.origin);
