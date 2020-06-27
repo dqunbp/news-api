@@ -2,7 +2,6 @@
   "name": "news-service-api",
   "version": "1.0.0",
   "main": "app.js",
-
   "scripts": {
     "pmStart": "cross-env NODE_ENV=production pm2 start app.js",
     "pmRestart": "cross-env NODE_ENV=production pm2 restart app",
@@ -13,8 +12,6 @@
     "inspect": "cross-env NODE_ENV=development node --inspect app.js",
     "deployEnv": "scp .env alex@84.201.168.135:/home/alex/news-api"
   },
-
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AleksandrHexlet/news-service-api.git"

@@ -2,6 +2,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -19,17 +20,26 @@ const { PORT } = require('./config');
 const app = express();
 
 const allowedCors = [
-  'http://news-today.site/',
-  'https://news-today.site/',
-  'https://www.news-today.site/',
-  'http://www.news-today.site/',
+  'http://news-today.site',
+  'https://news-today.site',
+  'https://www.news-today.site',
+  'http://www.news-today.site',
   'https://github.com/AleksandrHexlet',
-  'http://www.fotoshare.tk/',
-  'https://www.fotoshare.tk/',
-  'http://fotoshare.tk/',
-  'https://fotoshare.tk/',
+  'http://www.fotoshare.tk',
+  'https://www.fotoshare.tk',
+  'http://fotoshare.tk',
+  'https://fotoshare.tk',
   'http://localhost:8080',
 ];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    const originIsAllowed = allowedCors.indexOf(origin) !== -1;
+    callback(null, originIsAllowed);
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // app.use((req, res, next) => {
 //   const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
