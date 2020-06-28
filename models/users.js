@@ -3,12 +3,6 @@ const validator = require('validator');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 30,
-  },
   email: {
     type: String,
     required: true,
@@ -28,6 +22,12 @@ const userSchema = new mongoose.Schema({
     // если задать select: false , тогда API не будет возвращать хеш пароля. Поэтому в controllers.users  в функции login
     // eslint-disable-next-line max-len
     // в строке поиска email ===> user.findOne ({email}).select('+password') надо к findOne добавить .select ('+password')
+  },
+  name: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 30,
   },
 });
 
